@@ -50,6 +50,7 @@ class UserList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E8E8E8',
   },
   separator: {
     flex: 1,

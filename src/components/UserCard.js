@@ -4,26 +4,34 @@ import {
   View,
   Text,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 class UserCard extends Component {
   render() {
     return (
+      <TouchableHighlight
+        onPress={() => {  }}
+        style={{ padding: 5, borderRadius: 4, }}
+        activeOpacity={0.8}
+        underlayColor="#d9d9d9"
+      >
       <View style={styles.container}>
-        <Image
-          style={styles.gravatar}
-          defaultSource={require('./img/placeholder.png')}
-          source={{uri: this.props.gravatar}}
-        />
-        <View style={styles.details}>
-          <Text style={styles.title}>{this.props.name}</Text>
-          <Text style={styles.subTitle}>{this.props.login}</Text>
-          <View style={styles.follower}>
-            <Image style={styles.followerIcon} source={require('./img/followers-icon.png')} />
-            <Text style={styles.followerCount}>{this.props.followers}</Text>
+          <Image
+            style={styles.gravatar}
+            defaultSource={require('./img/placeholder.png')}
+            source={{uri: this.props.gravatar}}
+          />
+          <View style={styles.details}>
+            <Text style={styles.title}>{this.props.name}</Text>
+            <Text style={styles.subTitle}>{this.props.login}</Text>
+            <View style={styles.follower}>
+              <Image style={styles.followerIcon} source={require('./img/followers-icon.png')} />
+              <Text style={styles.followerCount}>{this.props.followers}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 }
