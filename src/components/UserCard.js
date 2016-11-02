@@ -12,6 +12,7 @@ class UserCard extends Component {
       <View style={styles.container}>
         <Image
           style={styles.gravatar}
+          defaultSource={require('./img/placeholder.png')}
           source={{uri: this.props.gravatar}}
         />
         <View style={styles.details}>
@@ -30,18 +31,19 @@ class UserCard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
     flexDirection: 'row',
   },
   gravatar: {
-    height: 100,
-    width: 100,
-    borderRadius: 4,
+    height: 72,
+    width: 72,
   },
   details: {
     paddingLeft: 5,
   },
   title: {
     fontSize: 24,
+    lineHeight: 24,
   },
   subTitle: {
     fontSize: 18,

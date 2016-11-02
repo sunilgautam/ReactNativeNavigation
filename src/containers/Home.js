@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import UserList from '../components/UserList';
@@ -19,8 +19,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
-    // backgroundColor: 'red',
   },
 });
 
