@@ -29,9 +29,19 @@ function navigationState (state = initialState, action) {
       return NavigationStateUtils.pop(state)
 
    default:
-     return state
+     return state;
 
   }
 }
 
-export default navigationState;
+function navigationParams(state = {}, action) {
+  switch (action.type) {
+    case PUSH_ROUTE:
+      return action.route;
+
+     default:
+       return state;
+  }
+}
+
+export {navigationState as default, navigationParams};

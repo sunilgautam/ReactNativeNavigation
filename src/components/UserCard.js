@@ -11,7 +11,7 @@ class UserCard extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress={() => {  }}
+        onPress={() => this.props.onUserClick(this.props.login)}
         style={{ padding: 5, borderRadius: 4, }}
         activeOpacity={0.8}
         underlayColor="#d9d9d9"

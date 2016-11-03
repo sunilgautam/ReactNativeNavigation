@@ -39,7 +39,7 @@ class UserList extends Component {
         {this.props.users.length > 0 &&
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={(data) => <UserCard {...data} />}
+            renderRow={(data) => <UserCard {...data} onUserClick={this.props.onUserClick} />}
             renderSeparator={this.renderSeparator}
           />
         }

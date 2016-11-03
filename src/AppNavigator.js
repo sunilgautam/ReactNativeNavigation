@@ -8,6 +8,7 @@ const {
 } = NavigationExperimental;
 import { connect } from 'react-redux';
 
+import { push, pop } from './actions/navigation';
 import Home from './containers/Home';
 import UserDetails from './containers/UserDetails';
 import UserGravatar from './containers/UserGravatar';
@@ -30,13 +31,13 @@ class AppNavigator extends Component {
   renderScene(props) {
     const { route } = props.scene;
     if (route.key === 'home') {
-     return <Home />
+     return <Home navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} />
     }
     if (route.key === 'details') {
-     return <UserDetails login="weierophinney" />
+     return <UserDetails navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} />
     }
     if (route.key === 'gravatar') {
-     return <UserGravatar login="weierophinney" />
+     return <UserGravatar navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} login="weierophinney" />
     }
   }
 
@@ -60,6 +61,7 @@ class AppNavigator extends Component {
         return this.handleBackAction();
 
       default:
+        console.warn('Nothing in action');
         return false
     }
   }

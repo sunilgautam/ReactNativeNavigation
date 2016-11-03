@@ -15,7 +15,7 @@ class UserDetails extends Component {
     super(props);
 
     this.state = {
-      user: this.props.users.find((u) => (u.login === this.props.login)),
+      user: this.props.users.find((u) => (u.login === this.props.navigationParams.login)),
     };
   }
 
@@ -34,9 +34,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps({users}) {
+function mapStateToProps(state) {
   return {
-    users,
+    users: state.users,
+    navigationParams: state.navigationParams,
   }
 }
 
