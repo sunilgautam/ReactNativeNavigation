@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import App from './src/App';
+import Setup from './src/Setup';
 
-AppRegistry.registerComponent('ReactNativeNavigation', () => App);
+AppRegistry.registerComponent('ReactNativeNavigation', () => Setup);
