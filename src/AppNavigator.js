@@ -71,7 +71,9 @@ class AppNavigator extends Component {
       <NavigationCardStack
         navigationState={this.props.navigation}
         onNavigate={this.handleNavigate.bind(this)}
+        onNavigateBack={this.handleBackAction}
         renderScene={this.renderScene}
+        enableGestures={false}
       />
     );
   }
