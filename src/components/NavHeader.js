@@ -19,7 +19,7 @@ const NavHeader = (props) => {
       />
       <View style={styles.subContainer}>
         <TouchableHighlight
-          onPress={() => {  }}
+          onPress={props.onBackPress}
           style={styles.leftButton}
           activeOpacity={0.8}
           underlayColor="#d9d9d9"

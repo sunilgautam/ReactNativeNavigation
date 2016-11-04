@@ -22,7 +22,7 @@ class UserDetails extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavHeader title={this.state.user.name} />
+        <NavHeader title={this.state.user.name} onBackPress={this.props.navigateBack} />
         <UserDetailsCard {...this.state.user} />
       </View>
     );
