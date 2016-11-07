@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-import NavHeader from '../components/NavHeader';
 import UserDetailsCard from '../components/UserDetailsCard';
 
 class UserGravatar extends Component {
@@ -27,7 +26,6 @@ class UserGravatar extends Component {
     let borderRadius = height / 2;
     return (
       <View style={styles.container}>
-        <NavHeader title={this.state.user.name} />
         <View style={styles.subContainer}>
           <Image
             style={{ height, width, borderRadius }}

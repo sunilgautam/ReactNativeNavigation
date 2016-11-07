@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
   BackAndroid,
-  NavigationExperimental
+  NavigationExperimental,
 } from 'react-native';
 const {
-  CardStack: NavigationCardStack
+  CardStack: NavigationCardStack,
 } = NavigationExperimental;
 import { connect } from 'react-redux';
 
 import { push, pop } from './actions/navigation';
+import AppHeader from './components/AppHeader';
 import Home from './containers/Home';
 import UserDetails from './containers/UserDetails';
 import UserGravatar from './containers/UserGravatar';
@@ -66,12 +67,22 @@ class AppNavigator extends Component {
     }
   }
 
+  renderHeader(sceneProps) {
+    return (
+      <AppHeader
+        {...sceneProps}
+        onNavigateBack={this.handleBackAction}
+      />
+    );
+  }
+
   render() {
     return (
       <NavigationCardStack
         navigationState={this.props.navigation}
         onNavigate={this.handleNavigate.bind(this)}
         onNavigateBack={this.handleBackAction}
+        renderHeader={this.renderHeader.bind(this)}
         renderScene={this.renderScene}
         enableGestures={false}
       />

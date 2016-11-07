@@ -7,7 +7,6 @@ import {
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-import NavHeader from '../components/NavHeader';
 import UserDetailsCard from '../components/UserDetailsCard';
 
 class UserDetails extends Component {
@@ -22,7 +21,6 @@ class UserDetails extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavHeader title={this.state.user.name} onBackPress={this.props.navigateBack} />
         <UserDetailsCard {...this.state.user} />
       </View>
     );

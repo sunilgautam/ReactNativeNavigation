@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import UserList from '../components/UserList';
-import Header from '../components/Header';
 
 class Home extends Component {
 
@@ -23,13 +22,13 @@ class Home extends Component {
   onUserClick(login) {
     let targetRoute = Object.assign({}, this.routeDetails);
     targetRoute.route.login = login;
+    targetRoute.route.title = '@' + login;
     this.props.navigate(targetRoute);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header />
         <UserList users={this.props.users} onUserClick={this.onUserClick} />
       </View>
     );
