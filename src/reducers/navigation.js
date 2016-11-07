@@ -39,7 +39,7 @@ function navigationState (state = initialState, action) {
       const route = action.route;
       const {tabs} = state;
       const tabKey = tabs.routes[tabs.index].key;
-      const scenes = state[tabKey];console.log(scenes);
+      const scenes = state[tabKey];
       const nextScenes = NavigationStateUtils.push(scenes, route);
       if (scenes !== nextScenes) {
         return {
@@ -54,12 +54,14 @@ function navigationState (state = initialState, action) {
       const {tabs} = state;
       const tabKey = tabs.routes[tabs.index].key;
       const scenes = state[tabKey];
-      const nextScenes = NavigationStateUtils.pop(scenes);
-      if (scenes !== nextScenes) {
-        return {
-          ...state,
-          [tabKey]: nextScenes,
-        };
+      if (scenes.index !== 0 && scenes.routes.length !== 1) {
+        const nextScenes = NavigationStateUtils.pop(scenes);
+        if (scenes !== nextScenes) {
+          return {
+            ...state,
+            [tabKey]: nextScenes,
+          };
+        }
       }
     }
 

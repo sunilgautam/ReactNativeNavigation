@@ -8,7 +8,7 @@ const {
 } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-import { push, pop } from './actions/navigation';
+import { push, pop, selectTab } from './actions/navigation';
 import AppHeader from './components/AppHeader';
 import Home from './containers/Home';
 import UserDetails from './containers/UserDetails';
@@ -60,9 +60,15 @@ class AppNavigator extends Component {
   }
 
   handleBackAction() {
-    if (this.props.navigation.index === 0) {
+    const tabIndex = this.props.navigation.tabs.index;
+    const tabKey = this.props.navigation.tabs.routes[tabIndex].key;
+    if (this.props.navigation[tabKey].index === 0) {
       // nothing in navigation stack
-      return false;
+
+      if (tabIndex === 0) {
+        return false;
+      }
+      return this.props.changeTab('home');
     }
     this.props.popRoute();
     return true;
