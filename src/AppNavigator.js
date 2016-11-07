@@ -40,7 +40,7 @@ class AppNavigator extends Component {
      return <UserDetails navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'gravatar') {
-     return <UserGravatar navigate={this.handleNavigate} navigateBack={this.handleBackAction} login="weierophinney" />
+     return <UserGravatar navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
   }
 
