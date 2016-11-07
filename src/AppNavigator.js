@@ -19,6 +19,8 @@ class AppNavigator extends Component {
     super(props);
     this.renderScene = this.renderScene.bind(this);
     this.handleBackAction = this.handleBackAction.bind(this);
+    this.handleNavigate = this.handleNavigate.bind(this);
+    this.renderHeader = this.renderHeader.bind(this);
   }
 
   componentDidMount () {
@@ -32,13 +34,13 @@ class AppNavigator extends Component {
   renderScene(props) {
     const { route } = props.scene;
     if (route.key === 'home') {
-     return <Home navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} />
+     return <Home navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'details') {
-     return <UserDetails navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} />
+     return <UserDetails navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'gravatar') {
-     return <UserGravatar navigate={this.handleNavigate.bind(this)} navigateBack={this.handleBackAction.bind(this)} login="weierophinney" />
+     return <UserGravatar navigate={this.handleNavigate} navigateBack={this.handleBackAction} login="weierophinney" />
     }
   }
 
@@ -80,9 +82,9 @@ class AppNavigator extends Component {
     return (
       <NavigationCardStack
         navigationState={this.props.navigation}
-        onNavigate={this.handleNavigate.bind(this)}
+        onNavigate={this.handleNavigate}
         onNavigateBack={this.handleBackAction}
-        renderHeader={this.renderHeader.bind(this)}
+        renderHeader={this.renderHeader}
         renderScene={this.renderScene}
         enableGestures={false}
       />
