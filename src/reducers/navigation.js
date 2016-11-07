@@ -1,32 +1,79 @@
-import { PUSH_ROUTE, POP_ROUTE } from '../constants/ActionTypes';
+import { PUSH_ROUTE, POP_ROUTE, SELECT_TAB } from '../constants/ActionTypes';
 import { NavigationExperimental } from 'react-native';
 const {
   StateUtils: NavigationStateUtils
 } = NavigationExperimental;
 
 const initialState = {
-  index: 0,
-  key: 'root',
-  routes: [{
-   key: 'home',
-   title: 'Home'
-  }]
+  // application tabs
+  tabs: {
+    index: 1,
+    routes: [
+      {key: 'home'},
+      {key: 'about'},
+      {key: 'contact'},
+    ],
+  },
+  // scenes for the `home` tab
+  home: {
+    index: 0,
+    routes: [{ key: 'home', title: 'Home' }],
+  },
+  // scenes for the `about` tab
+  about: {
+    index: 0,
+    routes: [{ key: 'about', title: 'About' }],
+  },
+  // scenes for the `contact` tab
+  contact: {
+    index: 0,
+    routes: [{ key: 'contact', title: 'Contact us' }],
+  },
 }
 
 function navigationState (state = initialState, action) {
   switch (action.type) {
 
-    case PUSH_ROUTE:
-      if (state.routes[state.index].key === (action.route && action.route.key)) {
-        return state;
+    case PUSH_ROUTE: {
+      // Push a route into the scenes stack.
+      const route = action.route;
+      const {tabs} = state;
+      const tabKey = tabs.routes[tabs.index].key;
+      const scenes = state[tabKey];console.log(scenes);
+      const nextScenes = NavigationStateUtils.push(scenes, route);
+      if (scenes !== nextScenes) {
+        return {
+          ...state,
+          [tabKey]: nextScenes,
+        };
       }
-      return NavigationStateUtils.push(state, action.route)
+    }
 
-    case POP_ROUTE:
-      if (state.index === 0 || state.routes.length === 1){
-        return state;
+    case POP_ROUTE: {
+      // Pops a route from the scenes stack.
+      const {tabs} = state;
+      const tabKey = tabs.routes[tabs.index].key;
+      const scenes = state[tabKey];
+      const nextScenes = NavigationStateUtils.pop(scenes);
+      if (scenes !== nextScenes) {
+        return {
+          ...state,
+          [tabKey]: nextScenes,
+        };
       }
-      return NavigationStateUtils.pop(state)
+    }
+
+    case SELECT_TAB: {
+      // Switches the tab.
+      const tabKey = action.tabKey;
+      const tabs = NavigationStateUtils.jumpTo(state.tabs, tabKey);
+      if (tabs !== state.tabs) {
+        return {
+          ...state,
+          tabs,
+        };
+      }
+    }
 
    default:
      return state;
