@@ -36,7 +36,7 @@ class AppHeader extends Component {
         <TouchableHighlight
           onPress={() => { console.warn('from header'); }}
         >
-        <Image style={{height: 30, width: 30,}} source={require('./components/img/placeholder.png')} />
+        <Image style={{height: 30, width: 30,}} source={require('./img/placeholder.png')} />
         </TouchableHighlight>
       </View>
     );
