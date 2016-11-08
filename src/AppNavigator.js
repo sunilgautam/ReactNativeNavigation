@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   BackAndroid,
   NavigationExperimental,
+  StyleSheet, View,
 } from 'react-native';
 const {
   CardStack: NavigationCardStack,
@@ -10,6 +11,7 @@ import { connect } from 'react-redux';
 
 import { push, pop, selectTab } from './actions/navigation';
 import AppHeader from './components/AppHeader';
+import AppTabsView from './containers/AppTabsView';
 import Home from './containers/Home';
 import UserDetails from './containers/UserDetails';
 import UserGravatar from './containers/UserGravatar';
@@ -27,35 +29,42 @@ class AppNavigator extends Component {
   }
 
   componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', this.handleBackAction)
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBackAction);
   }
 
   componentWillUnmount () {
-    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction)
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction);
+    this._tabView = null;
   }
 
   renderScene(props) {
     const { route } = props.scene;
-    if (route.key === 'home') {
-     return <Home navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
+    if (route.key === 'home' || route.key === 'about' || route.key === 'contact') {
+      return <AppTabsView
+                ref={(tabView) => { this._tabView = tabView; }}
+                navigate={this.handleNavigate}
+                navigateBack={this.handleBackAction}
+                route={route}
+              />
+      {/* return <Home navigate={this.handleNavigate} navigateBack={this.handleBackAction} /> */}
     }
     if (route.key === 'details') {
-     return <UserDetails navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
+      return <UserDetails navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'gravatar') {
-     return <UserGravatar navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
+      return <UserGravatar navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'about') {
-     return <About navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
+      return <About navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'terms') {
-     return <WebPage navigate={this.handleNavigate} navigateBack={this.handleBackAction} uri="https://omle.co/app/terms" />
+      return <WebPage navigate={this.handleNavigate} navigateBack={this.handleBackAction} uri="https://omle.co/app/terms" />
     }
     if (route.key === 'privacy') {
-     return <WebPage navigate={this.handleNavigate} navigateBack={this.handleBackAction} uri="https://omle.co/app/privacy" />
+      return <WebPage navigate={this.handleNavigate} navigateBack={this.handleBackAction} uri="https://omle.co/app/privacy" />
     }
     if (route.key === 'contact') {
-     return <Contact navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
+      return <Contact navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
   }
 
@@ -95,6 +104,7 @@ class AppNavigator extends Component {
       <AppHeader
         {...sceneProps}
         onNavigateBack={this.handleBackAction}
+        onMenuPress={() => { this._tabView.openDrawer(); }}
       />
     );
   }
@@ -106,18 +116,30 @@ class AppNavigator extends Component {
     const scenes = navigation[tabKey];
 
     return (
-      <NavigationCardStack
-        key={'stack_' + tabKey}
-        navigationState={scenes}
-        onNavigate={this.handleNavigate}
-        onNavigateBack={this.handleBackAction}
-        renderHeader={this.renderHeader}
-        renderScene={this.renderScene}
-        enableGestures={false}
-      />
+      <View style={styles.container}>
+        <NavigationCardStack
+          key={'stack_' + tabKey}
+          navigationState={scenes}
+          onNavigate={this.handleNavigate}
+          onNavigateBack={this.handleBackAction}
+          renderHeader={this.renderHeader}
+          renderScene={this.renderScene}
+          enableGestures={false}
+          style={styles.navigatorCardStack}
+        />
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  navigatorCardStack: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
+});
 
 function mapStateToProps(state) {
   return {

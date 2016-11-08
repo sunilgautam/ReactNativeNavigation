@@ -45,7 +45,7 @@ class AppHeader extends Component {
   renderLeftComponent(props) {
     if (props.scene.index === 0 || !props.onNavigateBack) {
       return (
-        <TouchableOpacity style={styles.buttonContainer} onPress={props.onPress}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={this.props.onMenuPress}>
           <Image style={styles.button} source={require('../components/img/menu-icon.png')} />
         </TouchableOpacity>
       );
@@ -61,8 +61,8 @@ class AppHeader extends Component {
     return (
       <NavigationHeader
         {...this.props}
+        renderLeftComponent={this.renderLeftComponent.bind(this)}
         renderTitleComponent={this.renderTitleComponent}
-        renderLeftComponent={this.renderLeftComponent}
       />
     );
   }
