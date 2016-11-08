@@ -99,18 +99,15 @@ class AppTabsView extends Component {
   render() {
     return (
       <Drawer
-  ref={(ref) => this._drawer = ref}
-  type="displace"
-  content={<ControlPanel />}
-  tapToClose={true}
-  openDrawerOffset={0.2} // 20% gap on the right side of drawer
-  panCloseMask={0.2}
-  closedDrawerOffset={-3}
-  styles={drawerStyles}
-  tweenHandler={(ratio) => ({
-    main: { opacity:(2-ratio)/2 }
-  })}
-  >
+        ref={(ref) => this._drawer = ref}
+        type="displace"
+        content={<ControlPanel />}
+        tapToClose={true}
+        openDrawerOffset={0.2}
+        styles={drawerStyles}
+        captureGestures={true}
+        panOpenMask={20}
+      >
         {this.renderContent()}
       </Drawer>
     );
