@@ -7,7 +7,7 @@ const {
 const initialState = {
   // application tabs
   tabs: {
-    index: 1,
+    index: 0,
     routes: [
       {key: 'home'},
       {key: 'about'},
@@ -40,12 +40,16 @@ function navigationState (state = initialState, action) {
       const {tabs} = state;
       const tabKey = tabs.routes[tabs.index].key;
       const scenes = state[tabKey];
-      const nextScenes = NavigationStateUtils.push(scenes, route);
-      if (scenes !== nextScenes) {
-        return {
-          ...state,
-          [tabKey]: nextScenes,
-        };
+
+      // do not push if route key already present
+      if (!NavigationStateUtils.has(scenes, route.key)) {
+        const nextScenes = NavigationStateUtils.push(scenes, route);
+        if (scenes !== nextScenes) {
+          return {
+            ...state,
+            [tabKey]: nextScenes,
+          };
+        }
       }
     }
 

@@ -1,16 +1,12 @@
 'use strict';
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
   DrawerLayoutAndroid,
 } from 'react-native';
 
 class AppDrawerLayout extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
@@ -20,22 +16,23 @@ class AppDrawerLayout extends Component {
   }
 
   render() {
-    const {...props} = this.props;
     return (
       <DrawerLayoutAndroid
-        drawerBackgroundColor="rgba(152, 145, 255, 1)"
-        style={{ top: 0, }}
         ref={(drawer) => { this._drawer = drawer; }}
-        {...props}
+        drawerBackgroundColor="rgba(255, 255, 255, 1)"
+        drawerWidth={290}
+        renderNavigationView={this.props.renderNavigationView}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         onDrawerOpen={this.onDrawerOpen}
-        onDrawerClose={this.onDrawerClose}>
+        onDrawerClose={this.onDrawerClose}
+      >
+        {this.props.children}
       </DrawerLayoutAndroid>
     );
   }
 
   componentWillUnmount() {
-    // this.context.removeBackButtonListener(this.handleBackButton);
+    this.props.removeBackButtonListener(this.handleBackButton);
     this._drawer = null;
   }
 
@@ -45,12 +42,12 @@ class AppDrawerLayout extends Component {
   }
 
   onDrawerOpen() {
-    // this.context.addBackButtonListener(this.handleBackButton);
+    this.props.addBackButtonListener(this.handleBackButton);
     this.props.onDrawerOpen && this.props.onDrawerOpen();
   }
 
   onDrawerClose() {
-    // this.context.removeBackButtonListener(this.handleBackButton);
+    this.props.removeBackButtonListener(this.handleBackButton);
     this.props.onDrawerClose && this.props.onDrawerClose();
   }
 
@@ -63,7 +60,7 @@ class AppDrawerLayout extends Component {
   }
 }
 
-AppDrawerLayout.contextTypes = {
+AppDrawerLayout.propTypes = {
   addBackButtonListener: React.PropTypes.func,
   removeBackButtonListener: React.PropTypes.func,
 };
