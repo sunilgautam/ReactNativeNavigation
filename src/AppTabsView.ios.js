@@ -8,11 +8,11 @@ import {
 
 import Drawer from 'react-native-drawer';
 
-import AppDrawerLayout from '../components/AppDrawerLayout';
-import MenuItem from '../components/MenuItem';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
+import AppDrawerLayout from './components/AppDrawerLayout';
+import MenuItem from './components/MenuItem';
+import Home from './containers/Home';
+import About from './containers/About';
+import Contact from './containers/Contact';
 
 const ControlPanel = () => {
   return (

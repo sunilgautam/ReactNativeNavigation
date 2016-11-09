@@ -6,11 +6,11 @@ import {
   ToastAndroid,
 } from 'react-native';
 
-import AppDrawerLayout from '../components/AppDrawerLayout';
-import MenuItem from '../components/MenuItem';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
+import AppDrawerLayout from './components/AppDrawerLayout';
+import MenuItem from './components/MenuItem';
+import Home from './containers/Home';
+import About from './containers/About';
+import Contact from './containers/Contact';
 
 class AppTabsView extends Component {
   constructor(props) {
