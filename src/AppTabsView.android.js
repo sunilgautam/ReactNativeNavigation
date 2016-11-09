@@ -9,10 +9,6 @@ import { connect } from 'react-redux';
 
 import AppDrawerLayout from './components/AppDrawerLayout';
 import MenuItem from './components/MenuItem';
-import Home from './containers/Home';
-import About from './containers/About';
-import Contact from './containers/Contact';
-
 import AppNavigator from './AppNavigator';
 
 class AppTabsView extends Component {

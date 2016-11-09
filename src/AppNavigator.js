@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BackAndroid,
   NavigationExperimental,
-  StyleSheet, View,
+  StyleSheet,
+  View,
 } from 'react-native';
 const {
   CardStack: NavigationCardStack,
@@ -11,7 +12,6 @@ import { connect } from 'react-redux';
 
 import { push, pop, selectTab } from './actions/navigation';
 import AppHeader from './components/AppHeader';
-import AppTabsView from './AppTabsView';
 import Home from './containers/Home';
 import UserDetails from './containers/UserDetails';
 import UserGravatar from './containers/UserGravatar';
