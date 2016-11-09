@@ -114,7 +114,6 @@ class AppTabsView extends Component {
     return (
       <AppDrawerLayout
         ref={(drawer) => { this._drawer = drawer; }}
-        drawerWidth={290}
         renderNavigationView={this.renderNavigationView.bind(this)}
         addBackButtonListener={this.addBackButtonListener}
         removeBackButtonListener={this.removeBackButtonListener}
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
   },
   drawer: {
     flex: 20,
+    marginTop: 0,
   },
   content: {
     flex: 1,

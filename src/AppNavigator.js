@@ -77,6 +77,7 @@ class AppNavigator extends Component {
           renderScene={this.renderScene}
           enableGestures={false}
           style={styles.navigatorCardStack}
+          cardStyle={styles.navigatorCardStyle}
         />
       </View>
     );
@@ -86,6 +87,10 @@ class AppNavigator extends Component {
 const styles = StyleSheet.create({
   navigatorCardStack: {
     flex: 1,
+  },
+  navigatorCardStyle: { // style to remove shadow from card which shows on drawer
+    shadowOpacity: 0,
+    shadowRadius: 0,
   },
   container: {
     flex: 1,
