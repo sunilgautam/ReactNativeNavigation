@@ -34,19 +34,12 @@ class AppNavigator extends Component {
 
   componentWillUnmount () {
     BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction);
-    this._tabView = null;
   }
 
   renderScene(props) {
     const { route } = props.scene;
-    if (route.key === 'home' || route.key === 'about' || route.key === 'contact') {
-      return <AppTabsView
-                ref={(tabView) => { this._tabView = tabView; }}
-                navigate={this.handleNavigate}
-                navigateBack={this.handleBackAction}
-                route={route}
-              />
-      {/* return <Home navigate={this.handleNavigate} navigateBack={this.handleBackAction} /> */}
+    if (route.key === 'home') {
+     return <Home navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
     }
     if (route.key === 'details') {
       return <UserDetails navigate={this.handleNavigate} navigateBack={this.handleBackAction} />
@@ -104,7 +97,7 @@ class AppNavigator extends Component {
       <AppHeader
         {...sceneProps}
         onNavigateBack={this.handleBackAction}
-        onMenuPress={() => { this._tabView.openDrawer(); }}
+        onMenuPress={() => { this.props.openDrawer(); }}
       />
     );
   }

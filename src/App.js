@@ -4,7 +4,7 @@ import {
   View,
   StatusBar,
 } from 'react-native';
-import AppNavigator from './AppNavigator';
+import AppTabsView from './AppTabsView';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
           backgroundColor="#BEBEBE"
           barStyle="default"
         />
-        <AppNavigator />
+        <AppTabsView />
       </View>
     );
   }

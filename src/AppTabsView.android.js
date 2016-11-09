@@ -5,12 +5,15 @@ import {
   View,
   ToastAndroid,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import AppDrawerLayout from './components/AppDrawerLayout';
 import MenuItem from './components/MenuItem';
 import Home from './containers/Home';
 import About from './containers/About';
 import Contact from './containers/Contact';
+
+import AppNavigator from './AppNavigator';
 
 class AppTabsView extends Component {
   constructor(props) {
@@ -30,43 +33,22 @@ class AppTabsView extends Component {
       <View style={styles.drawer}>
         <MenuItem
           title="Home"
-          selected={this.props.route.key === 'home'}
+          selected={this.props.tab === 'home'}
           onPress={this.onTabSelect.bind(this, 'home')}
           topBorder={true}
         />
         <MenuItem
           title="About"
-          selected={this.props.route.key === 'about'}
+          selected={this.props.tab === 'about'}
           onPress={this.onTabSelect.bind(this, 'about')}
         />
         <MenuItem
           title="Contact us"
-          selected={this.props.route.key === 'contact'}
+          selected={this.props.tab === 'contact'}
           onPress={this.onTabSelect.bind(this, 'contact')}
         />
       </View>
     );
-  }
-
-  renderContent() {console.log('===================', this.props.route.key);
-    switch (this.props.route.key) {
-      case 'home':
-        return (
-          <Home {...this.props} />
-        );
-
-      case 'about':
-        return (
-          <About {...this.props} />
-        );
-
-      case 'contact':
-        return (
-          <Contact {...this.props} />
-        );
-
-    }
-    throw new Error(`Unknown tab ${this.props.tab}`);
   }
 
   openDrawer() {
@@ -80,7 +62,9 @@ class AppTabsView extends Component {
         drawerWidth={290}
         renderNavigationView={this.renderNavigationView.bind(this)}>
         <View style={styles.content} key={this.props.tab}>
-          {this.renderContent()}
+          <AppNavigator
+            openDrawer={this.openDrawer.bind(this)}
+          />
         </View>
       </AppDrawerLayout>
     );
@@ -98,4 +82,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppTabsView;
+function mapStateToProps(state) {
+  return {
+    tab: state.navigation.tabs.routes[state.navigation.tabs.index].key,
+  }
+}
+
+export default connect(mapStateToProps)(AppTabsView);
