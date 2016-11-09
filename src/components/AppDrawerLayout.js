@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 
 class AppDrawerLayout extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
@@ -45,12 +45,12 @@ class AppDrawerLayout extends Component {
   }
 
   onDrawerOpen() {
-    // this.context.addBackButtonListener(this.handleBackButton);
+    this.props.addBackButtonListener(this.handleBackButton);
     this.props.onDrawerOpen && this.props.onDrawerOpen();
   }
 
   onDrawerClose() {
-    // this.context.removeBackButtonListener(this.handleBackButton);
+    this.props.removeBackButtonListener(this.handleBackButton);
     this.props.onDrawerClose && this.props.onDrawerClose();
   }
 
@@ -63,7 +63,7 @@ class AppDrawerLayout extends Component {
   }
 }
 
-AppDrawerLayout.contextTypes = {
+AppDrawerLayout.propTypes = {
   addBackButtonListener: React.PropTypes.func,
   removeBackButtonListener: React.PropTypes.func,
 };
