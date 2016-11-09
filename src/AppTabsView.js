@@ -4,6 +4,7 @@ import {
   BackAndroid,
   StyleSheet,
   View,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -129,13 +130,16 @@ class AppTabsView extends Component {
     );
   }
 }
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   drawer: {
     flex: 20,
-    marginTop: 0,
+    marginTop: STATUSBAR_HEIGHT,
   },
   content: {
     flex: 1,
