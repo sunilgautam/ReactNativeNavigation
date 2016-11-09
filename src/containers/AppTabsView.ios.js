@@ -6,16 +6,43 @@ import {
   ToastAndroid,
 } from 'react-native';
 
+import Drawer from 'react-native-drawer';
+
 import AppDrawerLayout from '../components/AppDrawerLayout';
 import MenuItem from '../components/MenuItem';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
 
+const ControlPanel = () => {
+  return (
+      <View style={styles.drawer}>
+        <MenuItem
+          title="Home"
+          topBorder={true}
+        />
+        <MenuItem
+          title="About"
+        />
+        <MenuItem
+          title="Contact us"
+        />
+      </View>
+    );
+}
+
 class AppTabsView extends Component {
   constructor(props) {
     super(props);
   }
+
+  closeControlPanel = () => {
+    this._drawer.close()
+  };
+
+  openDrawer = () => {
+    this._drawer.open()
+  };
 
   onTabSelect(tab) {
     // if (this.props.tab !== tab) {
@@ -69,29 +96,33 @@ class AppTabsView extends Component {
     throw new Error(`Unknown tab ${this.props.tab}`);
   }
 
-  openDrawer() {
-    this.refs.drawer.openDrawer();
-  }
-
   render() {
     return (
-      <AppDrawerLayout
-        ref="drawer"
-        drawerWidth={290}
-        renderNavigationView={this.renderNavigationView.bind(this)}>
-        <View style={styles.content} key={this.props.tab}>
-          {this.renderContent()}
-        </View>
-      </AppDrawerLayout>
+      <Drawer
+        ref={(ref) => this._drawer = ref}
+        type="displace"
+        content={<ControlPanel />}
+        tapToClose={true}
+        openDrawerOffset={0.2}
+        styles={drawerStyles}
+        captureGestures={true}
+        panOpenMask={20}
+      >
+        {this.renderContent()}
+      </Drawer>
     );
   }
+}
+const drawerStyles = {
+  drawer: { shadowColor: '#000000', shadowOpacity: 1, shadowRadius: 3},
+  main: {paddingLeft: 3},
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   drawer: {
-    flex: 20,
+    flex: 0.5,
   },
   content: {
     flex: 1,
