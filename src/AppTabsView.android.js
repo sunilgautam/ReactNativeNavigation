@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  ToastAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import { selectTab } from './actions/navigation';
 import AppDrawerLayout from './components/AppDrawerLayout';
 import MenuItem from './components/MenuItem';
 import AppNavigator from './AppNavigator';
@@ -17,10 +17,9 @@ class AppTabsView extends Component {
   }
 
   onTabSelect(tab) {
-    // if (this.props.tab !== tab) {
-    //   this.props.onTabSelect(tab);
-    // }
-    ToastAndroid.show(`${tab} selected`, ToastAndroid.SHORT);
+    if (this.props.tab !== tab) {
+      this.props.changeTab(tab);
+    }
     this.refs.drawer.closeDrawer();
   }
 
@@ -84,4 +83,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(AppTabsView);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeTab: (tabKey) => dispatch(selectTab(tabKey)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppTabsView);
