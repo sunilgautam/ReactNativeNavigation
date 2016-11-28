@@ -7,7 +7,6 @@ import {
 const {
   CardStack: NavigationCardStack,
 } = NavigationExperimental;
-import { connect } from 'react-redux';
 
 import { push, pop, selectTab } from './actions/navigation';
 import AppHeader from './components/AppHeader';
@@ -40,10 +39,10 @@ class AppNavigator extends Component {
       return <About navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} />
     }
     if (route.key === 'terms') {
-      return <WebPage navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} uri="https://omle.co/app/terms" />
+      return <WebPage navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} uri="http://www.lipsum.com/" />
     }
     if (route.key === 'privacy') {
-      return <WebPage navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} uri="https://omle.co/app/privacy" />
+      return <WebPage navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} uri="http://www.lipsum.com/" />
     }
     if (route.key === 'contact') {
       return <Contact navigate={this.props.handleNavigate} navigateBack={this.props.handleBackAction} />
@@ -71,7 +70,6 @@ class AppNavigator extends Component {
         <NavigationCardStack
           key={'stack_' + tabKey}
           navigationState={scenes}
-          onNavigate={this.props.handleNavigate}
           onNavigateBack={this.props.handleBackAction}
           renderHeader={this.renderHeader}
           renderScene={this.renderScene}
@@ -86,9 +84,9 @@ class AppNavigator extends Component {
 
 const styles = StyleSheet.create({
   navigatorCardStack: {
-    flex: 1,
+    flex: 20,
   },
-  navigatorCardStyle: { // style to remove shadow from card which shows on drawer
+  navigatorCardStyle: {
     shadowOpacity: 0,
     shadowRadius: 0,
   },
@@ -97,18 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
-  return {
-    navigation: state.navigation
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    pushRoute: (route) => dispatch(push(route)),
-    popRoute: () => dispatch(pop()),
-    changeTab: (tabKey) => dispatch(selectTab(tabKey)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavigator);
+export default AppNavigator;

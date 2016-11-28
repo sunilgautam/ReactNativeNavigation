@@ -124,6 +124,7 @@ class AppTabsView extends Component {
             openDrawer={this.openDrawer.bind(this)}
             handleNavigate={this.handleNavigate}
             handleBackAction={this.handleBackAction}
+            navigation={this.props.navigation}
           />
         </View>
       </AppDrawerLayout>
