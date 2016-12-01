@@ -25,6 +25,7 @@ class AppDrawerLayout extends Component {
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         onDrawerOpen={this.onDrawerOpen}
         onDrawerClose={this.onDrawerClose}
+        drawerLockMode={this.props.drawerLockMode}
       >
         {this.props.children}
       </DrawerLayoutAndroid>

@@ -14,6 +14,7 @@ class AppDrawerLayout extends Component {
   }
 
   render() {
+    const disabled = this.props.drawerLockMode !== 'unlocked';
     return (
       <DrawerIOS
         ref={(drawer) => { this._drawer = drawer; }}
@@ -37,6 +38,7 @@ class AppDrawerLayout extends Component {
             backgroundColor: 'rgba(255, 255, 255, 1)',
           }
         }}
+        disabled={disabled}
       >
         {this.props.children}
       </DrawerIOS>

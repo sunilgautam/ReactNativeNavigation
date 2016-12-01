@@ -112,12 +112,14 @@ class AppTabsView extends Component {
   }
 
   render() {
+    const lockMode = this.props.navigation[this.props.tab].index === 0 ? 'unlocked' : 'locked-closed';
     return (
       <AppDrawerLayout
         ref={(drawer) => { this._drawer = drawer; }}
         renderNavigationView={this.renderNavigationView.bind(this)}
         addBackButtonListener={this.addBackButtonListener}
         removeBackButtonListener={this.removeBackButtonListener}
+        drawerLockMode={lockMode}
       >
         <View style={styles.content} key={this.props.tab}>
           <AppNavigator
